@@ -1,48 +1,23 @@
-class StackNode{
-    int data;
-    StackNode next;
-    StackNode(int d){
-        data = d;
-        next = null;
-    }
-}
-public class p78{
-    StackNode top;
-    void push(int x){
-        StackNode newNode = new StackNode(x);
-        newNode.next = top;
-        top = newNode;
-        System.out.println("Pushed "+x);
-    }
-    int pop(){
-        if(top == null){
-            System.out.println("Stack empty");
-            return -1;
-        }
-        int val = top.data;
-        top = top.next;
-        return val;
-    }
-    void display(){
-        if (top == null){
-            System.out.println("Stack empty");
-            return;
-        }
-        StackNode temp = top;
-        System.out.print("Stack (top to bottom): ");
-        while(temp != null){
-            System.out.print(temp.data+" ");
-            temp = temp.next;
-        }
-        System.out.println();
-    }
+class Strcomp{
     public static void main(String[] args){
-        p78 stack = new p78();
-        stack.push(100);
-        stack.push(200);
-        stack.push(300);
-        stack.display();
-        System.out.println("Popped: "+stack.pop());
-        stack.display();
+        String s = "aabcccccaaa";
+        System.out.println(compress(s));
+    }
+    static String compress(String s){
+        if(s.length() == 0)
+             return s;
+        StringBuilder sb = new StringBuilder();
+        int cnt =1;
+        for (int i=1;i<=s.length();i++){
+            if(i<s.length()&&s.charAt(i)==s.charAt(i-1)) 
+                cnt++;
+            else{
+                sb.append(s.charAt(i-1));
+                if(cnt>1)
+                    sb.append(cnt);
+                cnt =1;
+            }
+        }
+        return (sb.length()<s.length()?sb.toString():s);
     }
 }
