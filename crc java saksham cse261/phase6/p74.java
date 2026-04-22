@@ -1,42 +1,24 @@
-class Node{
-    int data;
-    Node next;
-    Node(int d){
-        data = d;
-        next = null;
-    }
-}
-
-public class p74{
-    static Node reverseList(Node head){
-        Node prev = null;
-        Node current = head;
-        Node next = null;
-        while (current != null){
-            next = current.next;  
-            current.next = prev;  
-            prev = current;       
-            current = next;         
-        }
-        return prev;
-    }
-    static void printList(Node head){
-        Node temp = head;
-        while (temp != null){
-            System.out.print(temp.data+" -> ");
-            temp = temp.next;
-        }
-        System.out.println("null");
-    }
+class Dutchflag{
     public static void main(String[] args){
-        Node head = new Node(1);
-        head.next = new Node(2);
-        head.next.next = new Node(3);
-        head.next.next.next = new Node(4);
-        System.out.print("Original: ");
-        printList(head);
-        head = reverseList(head);
-        System.out.print("Reversed: ");
-        printList(head);
+        int[] arr ={2,0,2,1,1,0};
+        sortCol(arr);
+        for(int v:arr)
+             System.out.print(v+" ");
+    }
+    static void sortCol(int[] a){
+        int L=0, M=0, H =a.length-1;
+        while(M<=H){
+            if(a[M]==0) 
+                swap(a, L++, M++);
+            else if(a[M]==1)
+                 M++;
+            else 
+                swap(a, M, H--);
+        }
+    }
+    static void swap(int[] a, int i, int j) {
+        int t = a[i];
+         a[i] = a[j]; 
+         a[j] = t;
     }
 }
