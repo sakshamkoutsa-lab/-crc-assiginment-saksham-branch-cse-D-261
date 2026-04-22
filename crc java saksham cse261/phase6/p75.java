@@ -1,65 +1,23 @@
-class DNode{
-    int data;
-    DNode prev;
-    DNode next;
-    DNode(int d){
-        data = d;
-        prev = null;
-        next = null;
-    }
-}
-public class p75{
-    DNode head;
-    void insert(int value){
-        DNode newNode = new DNode(value);
-        if(head == null){
-            head = newNode;
-            return;
-        }
-        DNode temp = head;
-        while(temp.next != null){
-            temp = temp.next;
-        }
-        temp.next = newNode;
-        newNode.prev = temp;
-    }
-    void delete(int value){
-        if(head == null) return;
-        DNode temp = head;
-        while(temp != null && temp.data != value){
-            temp = temp.next;
-        }
-        if(temp == null){
-            System.out.println("Value not found");
-            return;
-        }
-        if(temp == head){
-            head = head.next;
-            if(head != null) head.prev = null;
-        } 
-        else{
-            temp.prev.next = temp.next;
-            if(temp.next != null) temp.next.prev = temp.prev;
-        }
-    }
-    void displayForward(){
-        DNode temp = head;
-        System.out.print("Forward: ");
-        while(temp != null){
-            System.out.print(temp.data+" <-> ");
-            temp = temp.next;
-        }
-        System.out.println("null");
-    }
+class Strcomp{
     public static void main(String[] args){
-        p75 dll = new p75();
-        dll.insert(5);
-        dll.insert(10);
-        dll.insert(15);
-        dll.displayForward();
-        dll.delete(10);
-        dll.displayForward();
-        dll.delete(5);
-        dll.displayForward();
+        String s ="aabcccccaaa";
+        System.out.println(compress(s));
+    }
+    static String compress(String s){
+        if(s.length()==0) 
+            return s;
+        StringBuilder sb =new StringBuilder();
+        int cnt =1;
+        for(int i=1;i<=s.length();i++){
+            if(i<s.length() && s.charAt(i)==s.charAt(i-1))
+                 cnt++;
+            else{
+                sb.append(s.charAt(i-1));
+                if(cnt>1) 
+                    sb.append(cnt);
+                cnt =1;
+            }
+        }
+        return (sb.length()<s.length()?sb.toString():s);
     }
 }
